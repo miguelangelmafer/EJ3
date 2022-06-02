@@ -1,6 +1,6 @@
 package com.bosonit.EJ3.Student.infraestructure.Controller;
 
-import com.bosonit.EJ3.Student.infraestructure.DTOs.StudentDTO;
+import com.bosonit.EJ3.Student.infraestructure.DTOs.InputStudentDTO;
 import com.bosonit.EJ3.Student.application.Port.CreateStudentPort;
 import com.bosonit.EJ3.Student.domain.StudentEnt;
 import org.modelmapper.ModelMapper;
@@ -20,9 +20,9 @@ public class CreateStudent {
     CreateStudentPort createStudentPort;
 
     @PostMapping("/add")
-    public StudentDTO addStudent(@RequestBody StudentDTO studentDTO){
-        StudentEnt studentEnt = createStudentPort.addStudent(modelMapper.map(studentDTO, StudentEnt.class));
-        studentDTO.setId_student(studentEnt.getId_student());
-        return studentDTO;
+    public InputStudentDTO addStudent(@RequestBody InputStudentDTO inputStudentDTO){
+        StudentEnt studentEnt = createStudentPort.addStudent(modelMapper.map(inputStudentDTO, StudentEnt.class));
+        inputStudentDTO.setId_student(studentEnt.getId_student());
+        return inputStudentDTO;
     }
 }

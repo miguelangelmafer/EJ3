@@ -4,7 +4,7 @@ import com.bosonit.EJ3.Person.domain.PersonaEnt;
 import lombok.Data;
 
 @Data
-public class StudentDTO {
+public class OutputStudentDTO {
 
     private String id_student;
     private PersonaEnt personaEnt;

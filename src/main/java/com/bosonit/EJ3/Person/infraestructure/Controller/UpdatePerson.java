@@ -15,7 +15,6 @@ public class UpdatePerson {
 
     @Autowired
     GetPersonUseCase getPersonUseCase;
-
     @Autowired
     UpdatePersonaPort updatePersonaPort;
 

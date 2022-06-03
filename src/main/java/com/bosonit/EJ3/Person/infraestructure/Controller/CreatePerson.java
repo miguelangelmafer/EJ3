@@ -1,7 +1,6 @@
 package com.bosonit.EJ3.Person.infraestructure.Controller;
 
 import com.bosonit.EJ3.Person.Exceptions.UnprocesableException;
-import com.bosonit.EJ3.Person.application.UseCase.GetPersonUseCase;
 import com.bosonit.EJ3.Person.application.Port.CreatePersonPort;
 import com.bosonit.EJ3.Person.domain.PersonaEnt;
 import com.bosonit.EJ3.Person.infraestructure.DTOs.InputPersonaDTO;

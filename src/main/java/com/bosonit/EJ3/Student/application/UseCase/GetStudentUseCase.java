@@ -1,7 +1,6 @@
 package com.bosonit.EJ3.Student.application.UseCase;
 
-import com.bosonit.EJ3.Person.Exceptions.NotFoundException;
-import com.bosonit.EJ3.Person.domain.PersonaEnt;
+
 import com.bosonit.EJ3.Student.application.Port.GetStudentPort;
 import com.bosonit.EJ3.Student.domain.StudentEnt;
 import com.bosonit.EJ3.Student.infraestructure.Repository.StudentRepository;
@@ -16,7 +15,8 @@ public class GetStudentUseCase implements GetStudentPort {
     @Autowired
     StudentRepository studentRepository;
 
-    public StudentEnt getStudentByID(String id) throws Exception{
+    public StudentEnt getStudentByID(String id) throws Exception
+    {
        return studentRepository.findById(id).orElseThrow(()-> new Exception("Usuario no encontrado"));
     }
 

@@ -1,7 +1,6 @@
 package com.bosonit.EJ3.Student.infraestructure.Controller;
 
-import com.bosonit.EJ3.Person.domain.PersonaEnt;
-import com.bosonit.EJ3.Person.infraestructure.DTOs.OutPersonaDTO;
+
 import com.bosonit.EJ3.Student.application.Port.GetStudentPort;
 import com.bosonit.EJ3.Student.domain.StudentEnt;
 import com.bosonit.EJ3.Student.infraestructure.DTOs.OutputStudentDTO;
@@ -9,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +26,7 @@ public class GetStudent {
 
     @GetMapping("/id/{id}")
 
-    public OutputStudentDTO getStudentByID(String id) throws Exception{
+    public OutputStudentDTO getStudentByID(@PathVariable String id) throws Exception{
         StudentEnt studentEnt = getStudentPort.getStudentByID(id);
         OutputStudentDTO outputStudentDTO = modelMapper.map(studentEnt,OutputStudentDTO.class);
         return outputStudentDTO;

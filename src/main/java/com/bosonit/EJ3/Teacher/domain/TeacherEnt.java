@@ -41,5 +41,6 @@ public class TeacherEnt {
 
     private String comments;
 
+    @NotNull
     private String branch;
 }

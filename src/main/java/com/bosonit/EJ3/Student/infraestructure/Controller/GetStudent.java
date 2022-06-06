@@ -3,14 +3,12 @@ package com.bosonit.EJ3.Student.infraestructure.Controller;
 
 import com.bosonit.EJ3.Student.application.Port.GetStudentPort;
 import com.bosonit.EJ3.Student.domain.StudentEnt;
+import com.bosonit.EJ3.Student.infraestructure.DTOs.OutputDTOStudentFull;
 import com.bosonit.EJ3.Student.infraestructure.DTOs.OutputStudentDTO;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,11 +23,13 @@ public class GetStudent {
     private ModelMapper modelMapper;
 
     @GetMapping("/id/{id}")
-
-    public OutputStudentDTO getStudentByID(@PathVariable String id) throws Exception{
-        StudentEnt studentEnt = getStudentPort.getStudentByID(id);
-        OutputStudentDTO outputStudentDTO = modelMapper.map(studentEnt,OutputStudentDTO.class);
-        return outputStudentDTO;
+//return DTOs diferentes
+    public OutputStudentDTO StudentByID(@PathVariable String id, @RequestParam(defaultValue = "simple",required = false) String outputType) throws Exception {
+        if (outputType.equals("full")) {
+            return new OutputDTOStudentFull(getStudentPort.getStudentByID(id));
+        }else{
+            return new OutputStudentDTO(getStudentPort.getStudentByID(id));
+        }
     }
 
     @GetMapping("/all")

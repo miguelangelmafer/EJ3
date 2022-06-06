@@ -35,7 +35,7 @@ public class StudentEnt {
             })
     private String id_student;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="id_persona")
     private PersonaEnt personaEnt;
 

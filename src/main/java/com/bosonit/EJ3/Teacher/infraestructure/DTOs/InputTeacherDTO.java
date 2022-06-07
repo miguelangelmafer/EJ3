@@ -7,7 +7,7 @@ import lombok.Data;
 public class InputTeacherDTO {
 
     private String id_teacher;
-    private PersonaEnt personaEnt;
+    private Integer id_persona;
     private String comments;
     private String branch;
 }

@@ -2,6 +2,7 @@ package com.bosonit.EJ3.Student.domain;
 
 import com.bosonit.EJ3.Person.domain.PersonaEnt;
 import com.bosonit.EJ3.StringPrefixedSequenceIdGenerator;
+import com.bosonit.EJ3.Teacher.domain.TeacherEnt;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -43,9 +44,10 @@ public class StudentEnt {
 
     private String comments;
 
-    //private String id_teacher;
-
     @NotNull
     private String branch;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_teacher")
+    private TeacherEnt teacherEnt;
 }

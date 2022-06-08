@@ -1,6 +1,8 @@
 package com.bosonit.EJ3.Person.domain;
 
 
+import com.bosonit.EJ3.Student.domain.StudentEnt;
+import com.bosonit.EJ3.Teacher.domain.TeacherEnt;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +22,7 @@ public class PersonaEnt {
     private Integer id_persona;
 
     @Column(name="Usuario")
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     private String usuario;
 
     @Column(name="Password")

@@ -47,7 +47,7 @@ public class StudentEnt {
     @NotNull
     private String branch;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id_teacher")
-    private TeacherEnt teacherEnt;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ID_teacher")
+    private TeacherEnt my_teacher;
 }

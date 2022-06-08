@@ -1,5 +1,6 @@
 package com.bosonit.EJ3.Teacher.infraestructure.Controller;
 
+import com.bosonit.EJ3.Person.Exceptions.NotFoundException;
 import com.bosonit.EJ3.Person.domain.PersonaEnt;
 import com.bosonit.EJ3.Person.infraestructure.Repository.PersonaRepository;
 import com.bosonit.EJ3.Teacher.application.Port.CreateTeacherPort;
@@ -29,7 +30,9 @@ public class CreateTeacher {
     @PostMapping("/add")
     public InputTeacherDTO addTeacher(@RequestBody InputTeacherDTO inputTeacherDTO){
         Optional<PersonaEnt>personaEnt=personaRepository.findById(inputTeacherDTO.getId_persona());
-        //para comprobar PersonaEnt.isPresent
+        if(personaEnt.isEmpty()){
+            throw new NotFoundException("El ID de persona indicado no existe");
+        }
         TeacherEnt teacherEnt =(modelMapper.map(inputTeacherDTO, TeacherEnt.class));
         teacherEnt.setPersonaEnt(personaEnt.get());
         teacherEnt = createTeacherPort.addTeacher(teacherEnt);
@@ -37,3 +40,4 @@ public class CreateTeacher {
         return inputTeacherDTO;
     }
 }
+

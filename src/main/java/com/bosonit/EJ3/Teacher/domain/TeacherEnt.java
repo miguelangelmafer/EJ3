@@ -2,6 +2,7 @@ package com.bosonit.EJ3.Teacher.domain;
 
 import com.bosonit.EJ3.Person.domain.PersonaEnt;
 import com.bosonit.EJ3.StringPrefixedSequenceIdGenerator;
+import com.bosonit.EJ3.Student.domain.StudentEnt;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.Parameter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -43,4 +45,7 @@ public class TeacherEnt {
 
     @NotNull
     private String branch;
+
+    @OneToMany(mappedBy = "my_teacher",cascade = CascadeType.ALL)
+    private List<StudentEnt> students;
 }

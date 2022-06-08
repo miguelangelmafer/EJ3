@@ -1,5 +1,6 @@
 package com.bosonit.EJ3.Student.infraestructure.Controller;
 
+import com.bosonit.EJ3.Person.Exceptions.NotFoundException;
 import com.bosonit.EJ3.Person.domain.PersonaEnt;
 import com.bosonit.EJ3.Person.infraestructure.Repository.PersonaRepository;
 import com.bosonit.EJ3.Student.infraestructure.DTOs.InputStudentDTO;
@@ -33,11 +34,16 @@ public class CreateStudent {
     @PostMapping("/add")
     public InputStudentDTO addStudent(@RequestBody InputStudentDTO inputStudentDTO){
         Optional<PersonaEnt> personaEnt=personaRepository.findById(inputStudentDTO.getId_persona());
+        if(personaEnt.isEmpty()){
+            throw new NotFoundException("El ID de persona indicado no existe");
+        }
         Optional<TeacherEnt> teacherEnt=teacherRepository.findById(inputStudentDTO.getId_teacher());
-//falta devolver en caso de no encontrar el id
+        if(teacherEnt.isEmpty()){
+            throw new NotFoundException("El ID de profesor indicado no existe");
+        }
         StudentEnt studentEnt =(modelMapper.map(inputStudentDTO, StudentEnt.class));
         studentEnt.setPersonaEnt(personaEnt.get());
-        studentEnt.setTeacherEnt(teacherEnt.get());
+        studentEnt.setMy_teacher(teacherEnt.get());
         studentEnt = createStudentPort.addStudent(studentEnt);
         inputStudentDTO.setId_student(studentEnt.getId_student());
         return inputStudentDTO;

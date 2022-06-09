@@ -41,11 +41,19 @@ public class CreateStudent {
         if(teacherEnt.isEmpty()){
             throw new NotFoundException("El ID de profesor indicado no existe");
         }
+        PersonaEnt checker = personaRepository.findById(inputStudentDTO.getId_persona()).orElseThrow(() -> new NotFoundException("PERSONAL DATA NOT FOUND"));
+        if(checker.getTeacherEnt() != null){
+            throw new NotFoundException("El ID de persona indicado ya esta asociado a un profesor");
+        }
+        if (checker.getStudentEnt() == null ) {
+
         StudentEnt studentEnt =(modelMapper.map(inputStudentDTO, StudentEnt.class));
         studentEnt.setPersonaEnt(personaEnt.get());
         studentEnt.setMy_teacher(teacherEnt.get());
         studentEnt = createStudentPort.addStudent(studentEnt);
         inputStudentDTO.setId_student(studentEnt.getId_student());
         return inputStudentDTO;
+        //mejorar este mensaje
+     }else throw new NotFoundException("El Id de persona indicado ya está asociado a otro estudiante");
     }
 }

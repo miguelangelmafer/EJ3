@@ -26,9 +26,7 @@ public class GetPersonUseCase implements GetPersonPort {
         List <PersonaEnt> listPersona = personaRepository.findByName(name);
         return listPersona;
     }
-
     //getall
-
     public List<PersonaEnt> getAllPerson() {
         List<PersonaEnt> personaList = personaRepository.findAll();
         return personaList;

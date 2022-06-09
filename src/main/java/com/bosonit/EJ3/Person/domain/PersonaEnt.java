@@ -62,4 +62,10 @@ public class PersonaEnt {
     @Column(name="Fecha_fin")
     private Date termination_date;
 
+    @OneToOne(mappedBy = "personaEnt")
+    private TeacherEnt teacherEnt;
+
+    @OneToOne(mappedBy = "personaEnt")
+    private StudentEnt studentEnt;
+
 }

@@ -28,16 +28,22 @@ public class CreateTeacher {
     PersonaRepository personaRepository;
 
     @PostMapping("/add")
-    public InputTeacherDTO addTeacher(@RequestBody InputTeacherDTO inputTeacherDTO){
-        Optional<PersonaEnt>personaEnt=personaRepository.findById(inputTeacherDTO.getId_persona());
-        if(personaEnt.isEmpty()){
+    public InputTeacherDTO addTeacher(@RequestBody InputTeacherDTO inputTeacherDTO) {
+        Optional<PersonaEnt> personaEnt = personaRepository.findById(inputTeacherDTO.getId_persona());
+        if (personaEnt.isEmpty()) {
             throw new NotFoundException("El ID de persona indicado no existe");
         }
-        TeacherEnt teacherEnt =(modelMapper.map(inputTeacherDTO, TeacherEnt.class));
-        teacherEnt.setPersonaEnt(personaEnt.get());
-        teacherEnt = createTeacherPort.addTeacher(teacherEnt);
-        inputTeacherDTO.setId_teacher(teacherEnt.getId_teacher());
-        return inputTeacherDTO;
+        PersonaEnt checker = personaRepository.findById(inputTeacherDTO.getId_persona()).orElseThrow(() -> new NotFoundException("PERSONAL DATA NOT FOUND"));
+       if(checker.getStudentEnt() != null){
+           throw new NotFoundException("El ID de persona indicado ya esta asociado a un estudiante");
+       }
+        if (checker.getTeacherEnt() == null) {
+
+            TeacherEnt teacherEnt = (modelMapper.map(inputTeacherDTO, TeacherEnt.class));
+            teacherEnt.setPersonaEnt(personaEnt.get());
+            teacherEnt = createTeacherPort.addTeacher(teacherEnt);
+            inputTeacherDTO.setId_teacher(teacherEnt.getId_teacher());
+            return inputTeacherDTO;
+        }else throw new NotFoundException("El ID de persona indicado ya está asociado a otro profesor");
     }
 }
-

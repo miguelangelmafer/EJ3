@@ -35,5 +35,14 @@ public class GetStudent_Subject {
         List<OutputStudent_SubjectDTO> outputStudent_subjectDTOList = modelMapper.map(student_subjectEntList, typeToken.getType());
         return outputStudent_subjectDTOList;
     }
-    
+
+    @GetMapping("/name/{subject}")
+    public List<OutputStudent_SubjectDTO> getSubjectByName(@PathVariable String subject) throws Exception {
+        List <Student_SubjectEnt> student_subjectEntList = getStudent_subjectPort.getSubjectByName(subject);
+        TypeToken<List<OutputStudent_SubjectDTO>> typeToken = new TypeToken<>() {
+        };
+        List<OutputStudent_SubjectDTO> outputStudent_subjectDTOList = modelMapper.map(student_subjectEntList, typeToken.getType());
+        return outputStudent_subjectDTOList;
+    }
+
 }

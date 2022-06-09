@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface Student_SubjectRepository extends JpaRepository<Student_SubjectEnt,String> {
-
+    List<Student_SubjectEnt> findBySubject(String subject);
 }

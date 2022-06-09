@@ -26,4 +26,9 @@ public class GetStudent_SubjectUseCase implements GetStudent_SubjectPort {
         return student_subjectEntList;
     }
 
+    public List <Student_SubjectEnt> getSubjectByName(String subject){
+        List <Student_SubjectEnt> student_subjectEntList = student_subjectRepository.findBySubject(subject);
+        return student_subjectEntList;
+    }
+
 }

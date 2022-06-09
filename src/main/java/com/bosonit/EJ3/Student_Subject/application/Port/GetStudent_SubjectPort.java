@@ -7,5 +7,6 @@ import java.util.List;
 public interface GetStudent_SubjectPort {
     public Student_SubjectEnt getSubjectByID(String id) throws Exception;
     public List<Student_SubjectEnt> getAllSubject();
+    public List <Student_SubjectEnt> getSubjectByName(String subject);
 
 }

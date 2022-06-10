@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class OutputPersonaStudentDTO extends OutPersonaDTO{
 
-    private OutputStudentDTO student;
+    private OutputStudentDTO studentEnt;
 }

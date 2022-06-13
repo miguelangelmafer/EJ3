@@ -2,6 +2,7 @@ package com.bosonit.EJ3.Student.domain;
 
 import com.bosonit.EJ3.Person.domain.PersonaEnt;
 import com.bosonit.EJ3.StringPrefixedSequenceIdGenerator;
+import com.bosonit.EJ3.Student_Subject.domain.Student_SubjectEnt;
 import com.bosonit.EJ3.Teacher.domain.TeacherEnt;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,9 @@ import org.hibernate.annotations.Parameter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -50,4 +54,13 @@ public class StudentEnt {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="ID_teacher")
     private TeacherEnt my_teacher;
+
+    //relacion con asignaturas
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "student_subject",
+            joinColumns = {@JoinColumn(name = "id_student")},
+            inverseJoinColumns = {@JoinColumn(name = "id_subject")}
+    )
+    private List<Student_SubjectEnt> subjects = new ArrayList<>();
 }

@@ -45,4 +45,9 @@ public class GetStudent_Subject {
         return outputStudent_subjectDTOList;
     }
 
+    @GetMapping("/idstudent/{id}")
+    public List<OutputStudent_SubjectDTO> getSubjectList(@PathVariable String id){
+        return getStudent_subjectPort.getSubjectStudent(id);
+    }
+
 }

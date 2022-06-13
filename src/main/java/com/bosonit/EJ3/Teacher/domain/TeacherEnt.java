@@ -10,6 +10,7 @@ import org.hibernate.annotations.Parameter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -47,5 +48,5 @@ public class TeacherEnt {
     private String branch;
 
     @OneToMany(mappedBy = "my_teacher",cascade = CascadeType.ALL)
-    private List<StudentEnt> students;
+    private List<StudentEnt> students = new ArrayList<>();
 }

@@ -37,4 +37,11 @@ public class GetTeacher {
         List<OutputTeacherDTO> outputTeacherDTOList = modelMapper.map(teacherEntList, typeToken.getType());
         return outputTeacherDTOList;
     }
+
+    @GetMapping("/{id}/students")
+
+    public List<OutputStudentDTO> getStudentsList(@PathVariable String id){
+
+        return getTeacherPort.getProfessorStudents(id);
+    }
 }

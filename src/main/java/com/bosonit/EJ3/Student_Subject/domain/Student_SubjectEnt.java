@@ -1,6 +1,7 @@
 package com.bosonit.EJ3.Student_Subject.domain;
 
 import com.bosonit.EJ3.StringPrefixedSequenceIdGenerator;
+import com.bosonit.EJ3.Student.domain.StudentEnt;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +9,10 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -37,6 +41,9 @@ public class Student_SubjectEnt {
     private String comments;
     private Date initial_date;
     private Date finish_date;
-    //private String id_student;
+
+    @ManyToMany(mappedBy = "subjects")
+    private List<StudentEnt> students = new ArrayList<>();
+
 
 }

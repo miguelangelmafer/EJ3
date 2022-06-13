@@ -10,4 +10,5 @@ public class InputStudent_SubjectDTO{
         private String comments;
         private Date initial_date;
         private Date finish_date;
+        private String id_student;
 }
